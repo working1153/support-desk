@@ -15,9 +15,9 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: false})) //use to decode get post body reference
 
-app.get('/', (req, res) => {
-  res.status(200).json({message: 'Welcome to the Support Desk API'})
-})
+// app.get('/', (req, res) => {
+//   res.status(200).json({message: 'Welcome to the Support Desk API'})
+// })
 
 
 //Routes
