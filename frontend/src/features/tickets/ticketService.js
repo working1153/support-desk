@@ -42,6 +42,19 @@ const getTicket = async (ticketId, token) => {
   return response.data
 } 
 
+
+//delete user ticket (test)
+const deleteTicket = async (ticketId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }
+
+  const response = await axios.delete(API_URL + ticketId, config)
+
+  return response.data
+} 
 //close  ticket
 const closeTicket = async (ticketId, token) => {
   const config = {
@@ -59,7 +72,8 @@ const ticketService = {
   createTicket,
   getTickets,
   getTicket,
-  closeTicket
+  closeTicket,
+  deleteTicket
 }
 
 export default ticketService

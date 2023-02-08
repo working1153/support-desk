@@ -3,7 +3,7 @@ import { toast }  from 'react-toastify'
 import Modal from 'react-modal'
 import { FaPlus } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
-import { getTicket, closeTicket } from '../features/tickets/ticketSlice'
+import { deleteTicket, getTicket, closeTicket } from '../features/tickets/ticketSlice'
 import { getNotes, createNote, reset as notesReset } from '../features/notes/noteSlice'
 import { useParams, useNavigate } from 'react-router-dom'
 import BackButton from '../components/BackButton'
@@ -54,6 +54,11 @@ function Ticket() {
     toast.success('Ticket Closed')
     navigate('/tickets')
   }
+  const onTicketDelete = () => {
+    dispatch(deleteTicket(ticketId))
+    toast.success('Ticket Delete')
+    navigate('/tickets')
+  }
 
   //Create note submit
   const onNoteSubmit = (e) => {
@@ -77,6 +82,9 @@ function Ticket() {
   return <div className='ticket-page'>
     <header className="ticket-header">
       <BackButton url='/tickets' />
+      <button onClick={onTicketDelete} className='btn btn-reverse'>
+        Delete
+      </button>
       <h2>
         Ticket ID: {ticket._id}
         <span className={`status status-${ticket.status}`}>

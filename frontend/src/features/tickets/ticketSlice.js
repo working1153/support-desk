@@ -69,6 +69,21 @@ export const closeTicket = createAsyncThunk('tickets/close',
     }
 })
 
+//Delete user ticket
+export const deleteTicket = createAsyncThunk('tickets/delete', 
+  async (ticketId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await ticketService.deleteTicket(ticketId, token)
+    } catch (error) {
+      const message = (error.response && error.response.data 
+        && error.response.data.message) || error.message || error.toString()
+
+      return thunkAPI.rejectWithValue(message)
+    }
+})
+
+
 export const ticketSlice = createSlice({
   name: 'ticket',
   initialState,
@@ -121,6 +136,20 @@ export const ticketSlice = createSlice({
           (ticket) => ticket._id === action.payload._id ? 
             (ticket.status = 'closed') : ticket
         )
+      })
+      //test for delete
+      .addCase(deleteTicket.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteTicket.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.tickets = state.tickets.filter(ticket => ticket._id !== action.payload._id)
+      })
+      .addCase(deleteTicket.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
       })
       
   }
