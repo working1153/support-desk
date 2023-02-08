@@ -63,6 +63,10 @@ function Ticket() {
   //Create note submit
   const onNoteSubmit = (e) => {
     e.preventDefault()
+    if(noteText === '') {
+      window.alert('please fill it');
+      return;
+    }
     dispatch(createNote({ noteText, ticketId }))
     closeModal()
   }
