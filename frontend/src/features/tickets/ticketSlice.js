@@ -138,12 +138,14 @@ export const ticketSlice = createSlice({
         )
       })
       //test for delete
-      .addCase(deleteTicket.pending, (state) => {
+      .addCase(deleteTicket.pending, (state, action) => {
         state.isLoading = true
+        state.tickets = state.tickets.filter(ticket => ticket._id !== action.payload._id)
       })
       .addCase(deleteTicket.fulfilled, (state, action) => {
         state.isLoading = false
-        state.tickets = state.tickets.filter(ticket => ticket._id !== action.payload._id)
+        state.isSuccess = true
+        //state.tickets = state.tickets.filter(ticket => ticket._id !== action.payload._id)
       })
       .addCase(deleteTicket.rejected, (state, action) => {
         state.isLoading = false
