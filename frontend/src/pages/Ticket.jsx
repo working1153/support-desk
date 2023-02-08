@@ -56,8 +56,10 @@ function Ticket() {
   }
   const onTicketDelete = () => {
     dispatch(deleteTicket(ticketId))
-    toast.success('Ticket Delete')
-    navigate('/tickets')
+    .then(() => {
+      toast.success('Ticket Deleted')
+      navigate('/tickets')
+    })
   }
 
   //Create note submit
