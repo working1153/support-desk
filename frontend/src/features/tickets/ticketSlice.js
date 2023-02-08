@@ -145,7 +145,7 @@ export const ticketSlice = createSlice({
       .addCase(deleteTicket.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        //state.tickets = state.tickets.filter(ticket => ticket._id !== action.payload._id)
+        state.tickets = state.tickets.filter(ticket => ticket._id !== action.payload._id)
       })
       .addCase(deleteTicket.rejected, (state, action) => {
         state.isLoading = false

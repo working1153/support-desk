@@ -54,9 +54,12 @@ function Ticket() {
     toast.success('Ticket Closed')
     navigate('/tickets')
   }
+
+
   const onTicketDelete = () => {
     dispatch(deleteTicket(ticketId))
     .then(() => {
+       
       toast.success('Ticket Deleted')
       navigate('/tickets')
     })
